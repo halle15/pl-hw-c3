@@ -13,6 +13,6 @@ int factor(void);
  
 int factor1(void);
 void error(void);
-void parse(void);
+void *parse(char *str);
 void match(TokenType tkType);
 struct Token getToken(void);
