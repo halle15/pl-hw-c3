@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "c3.h"
 // init commit
 
 int whichChar;
 int currentNum = 0;
-char currentChar
+char currentChar;
+char userString[250];
+
+
 struct Token thisToken;
 
 
@@ -19,24 +23,34 @@ void match(TokenType tkType){
 }
 
 void *parse(char *str){
-
-    char curChar = str[currentNum];
+    
+    currentChar = str[currentNum];
     
     thisToken = getToken();
 
-    if(isspace(curChar) == 0){
-        printf("%c", curChar);
+
+
+
+    switch(thisToken.type){
+        case WS:
+            break;
+        case NUMBER:
+            printf("%i NUMBER\n", thisToken.value);
+            break;
+        default:
+            printf("NOT IMPLEMENTED: %c\n", currentChar);
     }
-    else{
-        printf("WHITESPACE");
-    }
+
+
+
+
+
     currentNum += 1;
-    if(curChar != '\0'){
-        printf("\n");
+    if(currentChar != '\0'){
         parse(str);
     }
     else{
-        printf("END");
+        printf("$END$");
     }
 
     //parse will keep track of which character the iterator is on with whichchar.
@@ -44,11 +58,47 @@ void *parse(char *str){
     
 }
 
+
+
 struct Token getToken(void){
     struct Token tk;
+    if(currentChar == ' '){
+        tk.type = WS;
+        return tk;
+    }
+
+    if(isdigit(currentChar) != 0){
+        int ct = currentNum;
+        char ctchar = userString[ct];
+        int fullNum = 0;
 
 
-    if(isdigit(currentChar)){
+        /*
+        for(ct; isdigit(ctchar) != 0; ct++){
+            ctchar = userString[ct];
+
+        }
+        */
+               
+        char nextChar = userString[currentNum + 1];
+        printf("at: %i curr: %c", currentNum, currentChar);
+        while(isdigit(nextChar) != 0){
+            currentNum += 1;
+
+            printf("%c", nextChar);
+            nextChar = userString[currentNum + 1];
+        }
+        printf("\n");
+        int x = currentChar - '0';
+
+
+
+
+
+
+
+        tk.type = NUMBER;
+        tk.value = x;
         
     }
     // this function is meant to read the first character and then return the relevant token.
@@ -58,7 +108,7 @@ struct Token getToken(void){
 
 int main(){
 
-    char userString[250];
+    userString[250];
 
     gets(userString);
     

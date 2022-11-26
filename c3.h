@@ -1,5 +1,5 @@
 
-typedef enum {PLUS, MINUS, DIVIDE, MULT, REMAINDER, POWER, LPAREN, RPAREN, NUMBER, ERROR, EOL} TokenType;
+typedef enum {PLUS, MINUS, DIVIDE, MULT, REMAINDER, POWER, LPAREN, RPAREN, NUMBER, ERROR, EOL, WS} TokenType;
 
 struct Token {
     TokenType type;
@@ -16,3 +16,4 @@ void error(void);
 void *parse(char *str);
 void match(TokenType tkType);
 struct Token getToken(void);
+
