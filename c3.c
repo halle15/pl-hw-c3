@@ -81,21 +81,14 @@ struct Token getToken(void){
         */
                
         char nextChar = userString[currentNum + 1];
-        printf("at: %i curr: %c", currentNum, currentChar);
-        while(isdigit(nextChar) != 0){
-            currentNum += 1;
 
-            printf("%c", nextChar);
-            nextChar = userString[currentNum + 1];
-        }
-        printf("\n");
         int x = currentChar - '0';
 
-
-
-
-
-
+        while(isdigit(nextChar) != 0){
+            x = (10 * x) + (nextChar - '0');
+            currentNum += 1;
+            nextChar = userString[currentNum + 1];
+        }
 
         tk.type = NUMBER;
         tk.value = x;
