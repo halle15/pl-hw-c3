@@ -5,7 +5,7 @@ struct Token {
     TokenType type;
     int value;
 };
-
+void command(void);
 int expr(void);
 int term(void);
 int power(void);
