@@ -3,8 +3,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include "c3.h"
-// init commit
 
+/* These global variables are used to keep track of necesarry information
+    while iterating through during the parse() function.
+    
+
+*/
 int whichChar;
 int currentNum = 0;
 int totalNum = 0;
@@ -26,7 +30,7 @@ int term(void){
     // power, and optionally * power,or / power or % powerr
 }
 int power(void){
-    // either factor, or an optional power?
+    // either factor, or an optional power
 }
 
 int factor(void){
@@ -38,22 +42,22 @@ int factor1(void){
     // returns either group of expressions or a number
 }
 
-void match(TokenType tkType){
+/*
+    @desc: This function takes in the string previously read in by the user
+    and runs through related helper functions in order to properly display output.
 
-
-
-}
-
+*/
 void *parse(char *str){
     
     currentChar = str[currentNum];
     
-    thisToken = getToken();
+    thisToken = getToken(); 
 
 
 
     currentNum += 1;
 
+    // After retrieving our token and placing into a global var, we get the token type in order to display the correct output.
     switch(thisToken.type){
         case WS:
             break;
@@ -95,7 +99,7 @@ void *parse(char *str){
 
 
 
-
+    // If the current token type is not EOL, recall parse and keep going.
     if(thisToken.type != EOL){
         parse(str);
     }
@@ -103,15 +107,23 @@ void *parse(char *str){
         printf("INCORRECT INPUT :(");
     }
     else{
-        printf("$END$");
+        //otherwise, the end of the line has been reached and we must display the result.
+        printf("$END$ Result: %i", totalNum);
     }
-
+    
     //parse will keep track of which character the iterator is on with whichchar.
     //
     
 }
 
 
+/*  @desc The relevant helper function that returns a Token Struct when
+    a relevant character is read
+
+    @return Token the relevant structure read from the character
+
+
+*/
 
 struct Token getToken(void){
     struct Token tk;
